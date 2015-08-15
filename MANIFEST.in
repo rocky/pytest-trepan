@@ -1,0 +1,6 @@
+include .gitignore
+include MANIFEST.in
+include README.rst
+include pytest_trepan.py
+include setup.py
+include tox.ini

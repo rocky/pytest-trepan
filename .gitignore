@@ -1,0 +1,13 @@
+*.egg
+*.egg-info
+*.py?
+*~
+.python-version
+/*.egg
+/.eggs
+/.tox
+/ChangeLog
+/build
+/dist
+/how-to-make-a-release.txt
+/tmp
