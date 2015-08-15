@@ -2,7 +2,7 @@ Abstract
 ========
 
 
-A pytest plugin for running the [trepan debugger](https://pypi.python.org/pypi?:action=display&name=trepan)
+A pytest plugin for running the `trepan debugger <https://pypi.python.org/pypi?:action=display&name=trepan>`_
 
 
 Project Details
