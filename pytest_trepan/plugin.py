@@ -4,9 +4,6 @@ from trepan.api import debug as trepan_debug
 from trepan.post_mortem import post_mortem as trepan_post_mortem
 import sys
 
-import pytest
-
-
 def pytest_addoption(parser):
     """Adds option --trepan to py.test"""
     group = parser.getgroup("general")
@@ -16,8 +13,10 @@ def pytest_addoption(parser):
 
 
 def pytest_namespace():
-    """Allows user code to insert pytest.debug() to enter the trepan debugger"""
-    return {'debug': pytestTrepan().debug}
+    """Allows user code to insert pytest.trepan() to enter the trepan
+    debugger.
+    """
+    return {'trepan': pytestTrepan().debug}
 
 
 def pytest_configure(config):
