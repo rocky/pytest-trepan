@@ -1,7 +1,7 @@
 """ interactive debugging with the Trepan Python Debugger. """
 from __future__ import absolute_import
 from trepan.api import debug as trepan_debug
-import trepan.post_mortem
+from trepan.post_mortem import post_mortem as trepan_post_mortem
 import sys
 
 import pytest
@@ -41,8 +41,17 @@ class pytestTrepan:
     _pluginmanager = None
     _config = None
 
-    def debug(self):
-        """invoke Trepan debugging, dropping any IO capturing."""
+    def debug(self, immediate=True, *args, **kwargs):
+        """invoke Trepan debugging, dropping any I/O capturing.
+        If you want to stop at the call before the next statement, set
+        immediate=True. Set immediate=False will stop just before the subsequent
+        statement which sometimes might be in another scope.
+
+        You can also pass trepan.debug options. In particular
+        immediate=True is the the same as arguments: level=1, step_count=0,
+        and will override setting those; immediate=False sets level=0,
+        step_count=2
+        """
         import _pytest.config
         capman = None
         if self._pluginmanager is not None:
@@ -53,7 +62,15 @@ class pytestTrepan:
             tw.line()
             tw.sep(">", "Trepan set_trace (IO-capturing turned off)")
             self._pluginmanager.hook.pytest_enter_pdb()
-        trepan_debug(level=1)
+        if immediate:
+            kwargs['level'] = 1
+            kwargs['step_ignore'] = 0
+        else:
+            if not 'level' in kwargs:
+                kwargs['level'] = 0
+            if not 'step_ignore' in kwargs:
+                kwargs['step_ignore'] = 2
+        trepan_debug(*args, **kwargs)
 
 
 class TrepanInvoke:
@@ -96,4 +113,4 @@ def _postmortem_traceback(excinfo):
 
 
 def post_mortem(e):
-    trepan.post_mortem.post_mortem(e)
+    trepan_post_mortem(e)

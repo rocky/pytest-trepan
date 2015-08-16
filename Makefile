@@ -15,41 +15,41 @@ PHONY=check clean dist distclean test test-unit test-functional rmChangeLog nose
 #: Default target - same as "check"
 all: check
 
-#: Same as "check"
-test: check
+# #: Same as "check"
+# test: check
 
-#: Run all tests: unit, functional and integration
-check-short: test-unit-short test-functional-short test-integration-short
+# #: Run all tests: unit, functional and integration
+# check-short: test-unit-short test-functional-short test-integration-short
 
-#: Run all tests: unit, functional and integration verbosely
-check: test-unit test-functional test-integration
+# #: Run all tests: unit, functional and integration verbosely
+# check: test-unit test-functional test-integration
 
-#: Run unit (white-box) tests
-test-unit:
-	$(PYTHON) ./setup.py nosetests
+# #: Run unit (white-box) tests
+# test-unit:
+# 	$(PYTHON) ./setup.py nosetests
 
-#: Run unit (white-box) tests
-test-unit-short:
-	$(PYTHON) ./setup.py nosetests --quiet | \
-	$(PYTHON) ./make-check-filter.py
+# #: Run unit (white-box) tests
+# test-unit-short:
+# 	$(PYTHON) ./setup.py nosetests --quiet | \
+# 	$(PYTHON) ./make-check-filter.py
 
-#: Run functional tests
-test-functional:
-	(cd test/functional && $(PYTHON) ./setup.py nosetests)
+# #: Run functional tests
+# test-functional:
+# 	(cd test/functional && $(PYTHON) ./setup.py nosetests)
 
-#: Run functional tests
-test-functional-short:
-	(cd test/functional && $(PYTHON) ./setup.py nosetests) | \
-	$(PYTHON) ./make-check-filter.py
+# #: Run functional tests
+# test-functional-short:
+# 	(cd test/functional && $(PYTHON) ./setup.py nosetests) | \
+# 	$(PYTHON) ./make-check-filter.py
 
-#: Run integration (black-box) tests
-test-integration:
-	 (cd test/integration && $(PYTHON) ./setup.py nosetests)
+# #: Run integration (black-box) tests
+# test-integration:
+# 	 (cd test/integration && $(PYTHON) ./setup.py nosetests)
 
-#: Run integration (black-box) tests
-test-integration-short:
-	(cd test/integration && $(PYTHON) ./setup.py nosetests) | \
-	$(PYTHON) ./make-check-filter.py
+# #: Run integration (black-box) tests
+# test-integration-short:
+# 	(cd test/integration && $(PYTHON) ./setup.py nosetests) | \
+# 	$(PYTHON) ./make-check-filter.py
 
 #: Clean up temporary files
 clean:
