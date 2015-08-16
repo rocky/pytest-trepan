@@ -19,7 +19,7 @@ After installing, to set a breakpoint to enter the trepan debugger::
 
 The above will look like it is stopped at the *pytest.trepan()*
 call. This is most useful when this is the last statement of a
-scope. If you want to stop instead before `x = 1` pass `immediate=False` or just False:
+scope. If you want to stop instead before `x = 1` pass `immediate=False` or just False::
 
     import pytest
     def test_function():
