@@ -31,7 +31,7 @@ scope. If you want to stop instead before ``x = 1`` pass ``immediate=False`` or 
 
 You can also pass as keyword arguments any parameter accepted by *trepan.api.debug()*.
 
-To have the debugger entered on error, use the `--trepan` option::
+To have the debugger entered on error, use the ``--trepan`` option::
 
     $ py.test --trepan ...
 
