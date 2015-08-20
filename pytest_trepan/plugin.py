@@ -40,7 +40,7 @@ class pytestTrepan:
     _pluginmanager = None
     _config = None
 
-    def debug(self, immediate=True, *args, **kwargs):
+    def debug(self, immediate=False, *args, **kwargs):
         """invoke Trepan debugging, dropping any I/O capturing.
         If you want to stop at the call before the next statement, set
         immediate=True. Set immediate=False will stop just before the subsequent
