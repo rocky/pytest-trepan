@@ -2,6 +2,9 @@ import sys, re
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
+PYTHON3 = (sys.version_info >= (3, 0))
+trepan_version ='trepan3k' if PYTHON3 else 'trepan2'
+
 
 class PyTest(TestCommand):
     """
@@ -36,7 +39,7 @@ setup(
     },
     install_requires=[
         'pytest>=2.6.0',
-        'trepan>=0.5.1'
+        '%s>=0.7.6' % trepan_version
     ],
     zip_safe=False,
 
@@ -54,9 +57,12 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Debuggers',
     ],
-    tests_requires=['pytest'],
+    test_requires=['pytest'],
     cmdclass={'test': PyTest},
 )
