@@ -3,8 +3,10 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 PYTHON3 = (sys.version_info >= (3, 0))
-trepan_version ='trepan3k' if PYTHON3 else 'trepan2'
-
+if PYTHON3:
+    trepan_version ='trepan3k'
+else:
+    trepan_version = 'trepan2'
 
 class PyTest(TestCommand):
     """
@@ -25,10 +27,13 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
-with open('pytest_trepan/__init__.py') as f:
+try:
+    f = open('pytest_trepan/__init__.py')
     m = re.search("version = '(.*)'", f.read())
     assert m is not None
     version = m.group(1)
+finally:
+    f.close()
 
 setup(
     name="pytest-trepan",
@@ -38,7 +43,7 @@ setup(
         'pytest11': ['pytest-qt = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest>=2.6.0',
+        'pytest>=2.0.0',
         '%s>=0.7.6' % trepan_version
     ],
     zip_safe=False,
