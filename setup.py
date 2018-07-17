@@ -43,7 +43,7 @@ setup(
         'pytest11': ['pytest-qt = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest>=2.0.0',
+        'pytest>=2.0.0,<=3.2.0',
         '%s>=0.7.6' % trepan_version
     ],
     zip_safe=False,
