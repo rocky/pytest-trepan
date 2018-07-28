@@ -31,5 +31,4 @@ To have the debugger entered on error, use the ``--trepan`` option::
 
 __docformat__ = 'restructuredtext'
 
-version = '2.0.0'
-__version__ = version
+from .version import VERSION  # NOQA

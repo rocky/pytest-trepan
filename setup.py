@@ -26,18 +26,18 @@ class PyTest(TestCommand):
         errno = pytest.main([])
         sys.exit(errno)
 
+import os
+def get_srcdir():
+    filename = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.realpath(filename)
 
-try:
-    f = open('pytest_trepan/__init__.py')
-    m = re.search("version = '(.*)'", f.read())
-    assert m is not None
-    version = m.group(1)
-finally:
-    f.close()
+# version.py sets variable VERSION.
+VERSION = None
+exec(open(os.path.join(get_srcdir(), 'pytest_trepan', 'version.py')).read())
 
 setup(
     name="pytest-trepan",
-    version=version,
+    version=VERSION,
     packages=['pytest_trepan'],
     entry_points={
         'pytest11': ['pytest-qt = pytest_trepan.plugin'],

@@ -1,0 +1,6 @@
+2.0.0 2018-07-28
+
+- Change to make it work on pytest 3.3 and greater.
+  Note this will no longer work on pytest 3.2 and before
+
+1.0.0 2015-09-07

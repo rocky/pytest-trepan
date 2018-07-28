@@ -21,9 +21,6 @@ test: check
 check:
 	py.test pytest
 
-# #: Run all tests: unit, functional and integration
-# check-short: test-unit-short test-functional-short test-integration-short
-
 #: Clean up temporary files
 clean:
 	@rm -fr */__pycache__/*.pyc
