@@ -56,7 +56,7 @@ class pytestTrepan:
         if self._pluginmanager is not None:
             capman = self._pluginmanager.getplugin("capturemanager")
             if capman:
-                capman.suspendcapture(in_=True)
+                capman.suspend_global_capture(in_=True)
             tw = _pytest.config.create_terminal_writer(self._config)
             tw.line()
             tw.sep(">", "Trepan set_trace (IO-capturing turned off)")
@@ -76,7 +76,7 @@ class TrepanInvoke:
     def pytest_exception_interact(self, node, call, report):
         capman = node.config.pluginmanager.getplugin("capturemanager")
         if capman:
-            capman.suspendcapture(in_=True)
+            capman.suspend_global_capture(in_=True)
         _enter_trepan(node, call.excinfo, report)
 
     def pytest_internalerror(self, excrepr, excinfo):

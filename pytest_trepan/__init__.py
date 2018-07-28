@@ -31,5 +31,5 @@ To have the debugger entered on error, use the ``--trepan`` option::
 
 __docformat__ = 'restructuredtext'
 
-version = '1.0.1'
+version = '2.0.0'
 __version__ = version

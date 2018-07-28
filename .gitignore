@@ -6,6 +6,7 @@
 .python-version
 /*.egg
 /.eggs
+/.pytest_cache
 /.tox
 /ChangeLog
 /build

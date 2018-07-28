@@ -43,8 +43,8 @@ setup(
         'pytest11': ['pytest-qt = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest>=2.0.0,<=3.2.0',
-        '%s>=0.7.6' % trepan_version
+        'pytest>=3.3.0',
+        '%s>=0.8.7' % trepan_version
     ],
     zip_safe=False,
 
@@ -61,13 +61,11 @@ setup(
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Debuggers',
     ],
-    test_requires=['pytest'],
     cmdclass={'test': PyTest},
 )
