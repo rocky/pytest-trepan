@@ -56,7 +56,13 @@ class pytestTrepan:
         if self._pluginmanager is not None:
             capman = self._pluginmanager.getplugin("capturemanager")
             if capman:
-                capman.suspend_global_capture(in_=True)
+                # Older pytest before 3.1.3 July 2017 does this
+                if hasattr(capman, "suspend_global_capture"):
+                    capman.suspend_global_capture(in_=True)
+                # Newer pytest does this
+                elif hasattr(capman, "suspendcapture"):
+                    capman.suspendcapture(in_=True)
+
             tw = _pytest.config.create_terminal_writer(self._config)
             tw.line()
             tw.sep(">", "Trepan set_trace (IO-capturing turned off)")
