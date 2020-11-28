@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-pytest_plugins = "pytester"
-
-
 class Option(object):
     def __init__(self, no_trepan=False):
         self.no_trepan = no_trepan
@@ -16,15 +13,7 @@ class Option(object):
         return l
 
 
-def pytest_generate_tests(metafunc):
-    if "option" in metafunc.fixturenames:
-        metafunc.addcall(id="default",
-                         funcargs={'option': Option(no_trepan=False)})
-        metafunc.addcall(id="no_trepan",
-                         funcargs={'option': Option(no_trepan=True)})
-
-
-def test_post_mortem(testdir, option):
+def test_post_mortem(testdir):
     testdir.makepyfile(
         """
         def test_func():
@@ -32,9 +21,4 @@ def test_post_mortem(testdir, option):
         """
     )
 
-    result = testdir.runpytest(*option.args)
-
-    if option.no_trepan:
-        print(result)
-    else:
-        print(result)
+    testdir.runpytest()

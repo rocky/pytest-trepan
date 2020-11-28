@@ -1,5 +1,5 @@
 """ interactive debugging with the Trepan Python Debugger. """
-from __future__ import absolute_import
+import pytest
 from trepan.api import debug as trepan_debug
 from trepan.post_mortem import post_mortem as trepan_post_mortem
 import sys
@@ -12,18 +12,19 @@ def pytest_addoption(parser):
                      help="start the trepan Python debugger on errors.")
 
 
-def pytest_namespace():
-    """Allows user code to insert pytest.trepan() to enter the trepan
-    debugger.
-    """
-    return {'trepan': pytestTrepan().debug}
+if pytest.__version__ <= "3.2":
+    def pytest_namespace():
+        """Allows user code to insert pytest.trepan() to enter the trepan
+        debugger.
+        """
+        return {'pytest_trepan': pytestTrepan().debug}
 
 
 def pytest_configure(config):
     """Called to configure pytest when "pytest --trepan ... " is invoked"""
     if config.getvalue("usetrepan"):
-        # 'pdbinvoke' is a magic name?
-        config.pluginmanager.register(TrepanInvoke(), 'pdbinvoke')
+        # What does the string 'trepaninvoke' do??
+        config.pluginmanager.register(TrepanInvoke(), 'trepaninnvoke')
 
     old = pytestTrepan._pluginmanager
 
@@ -79,6 +80,7 @@ class pytestTrepan:
 
 
 class TrepanInvoke:
+    """This gets invoked by pytest"""
     def pytest_exception_interact(self, node, call, report):
         capman = node.config.pluginmanager.getplugin("capturemanager")
         if capman:
@@ -119,3 +121,6 @@ def _postmortem_traceback(excinfo):
 
 def post_mortem(e):
     trepan_post_mortem(e)
+
+def debug(immediate=False, *args, **kwargs):
+    pytestTrepan().debug(immediate, *args, **kwargs)

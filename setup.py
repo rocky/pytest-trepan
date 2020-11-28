@@ -31,19 +31,19 @@ def get_srcdir():
     filename = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
     return os.path.realpath(filename)
 
-# version.py sets variable VERSION.
-VERSION = None
+# version.py sets variable __version__.
+__version__ = None
 exec(open(os.path.join(get_srcdir(), 'pytest_trepan', 'version.py')).read())
 
 setup(
     name="pytest-trepan",
-    version=VERSION,
+    version=__version__,
     packages=['pytest_trepan'],
     entry_points={
-        'pytest11': ['pytest-qt = pytest_trepan.plugin'],
+        'pytest11': ['trepan = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest==3.2.0',
+        'pytest',
         '%s>=0.8.10' % trepan_version
     ],
     zip_safe=False,
@@ -67,6 +67,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Software Development :: Debuggers',
+         "Framework :: Pytest",
     ],
     cmdclass={'test': PyTest},
 )
