@@ -15,7 +15,11 @@ def pytest_addoption(parser):
                      action="store_true", dest="usetrepan", default=False,
                      help="start the trepan Python debugger on errors.")
 
-
+def pytest_namespace():
+    """Allows user code to insert pytest.trepan() to enter the trepan
+      debugger.
+      """
+    return {'pytest_trepan': pytestTrepan().debug}
 
 
 def pytest_configure(config):
@@ -23,7 +27,7 @@ def pytest_configure(config):
     # Modern pytest compatibility - inject trepan into pytest namespace
     # This replaces the deprecated pytest_namespace hook
     pytest.trepan = pytestTrepan().debug
-    
+
     if config.getvalue("usetrepan"):
         # What does the string 'trepaninvoke' do??
         config.pluginmanager.register(TrepanInvoke(), 'trepaninnvoke')
@@ -69,7 +73,7 @@ class pytestTrepan:
             tw = _pytest.config.create_terminal_writer(self._config)
             tw.line()
             tw.sep(">", "Trepan set_trace (IO-capturing turned off)")
-            # self._pluginmanager.hook.pytest_enter_pdb()
+            self._pluginmanager.hook.pytest_enter_pdb()
         if immediate:
             kwargs['level'] = 1
             kwargs['step_ignore'] = 0

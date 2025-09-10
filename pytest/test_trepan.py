@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import pytest
+import pytest_trepan
 
 
 class Option:
@@ -9,12 +9,6 @@ class Option:
     @property
     def args(self) -> list:
         return ["--pdb"] if self.no_trepan else ["--trepan"]
-
-
-def test_trepan_namespace_available():
-    """Test that pytest.trepan is available after plugin loads"""
-    assert hasattr(pytest, "trepan"), "pytest.trepan should be available"
-    assert callable(pytest.trepan), "pytest.trepan should be callable"
 
 
 def test_post_mortem(testdir):

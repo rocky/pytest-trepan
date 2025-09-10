@@ -32,3 +32,8 @@ __docformat__ = "restructuredtext"
 
 from pytest_trepan.version import __version__  # NOQA
 from pytest_trepan.plugin import debug
+
+__all__ = [
+    "__version__",
+    "debug",
+]

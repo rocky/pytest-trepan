@@ -4,11 +4,7 @@ import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-PYTHON3 = (sys.version_info >= (3, 0))
-if PYTHON3:
-    trepan_version ='trepan3k'
-else:
-    trepan_version = 'trepan2'
+trepan_version ='trepan3k'
 
 class PyTest(TestCommand):
     """
@@ -41,11 +37,11 @@ setup(
     version=__version__,
     packages=['pytest_trepan'],
     entry_points={
-        'pytest11': ['trepan = pytest_trepan.plugin'],
+        'pytest': ['trepan = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest>=4.0.0',  # Minimum version that removed pytest_namespace
-        '%s>=0.8.10' % trepan_version
+        'pytest<=4.6.3',  # Minimum version that removed pytest_namespace
+        '%s>=1.0.0' % trepan_version
     ],
     zip_safe=False,
 
