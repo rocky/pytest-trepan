@@ -2,7 +2,7 @@ Abstract
 ========
 
 
-A pytest plugin for running the `trepan debugger <https://pypi.python.org/pypi/trepan2>`_
+A pytest plugin for running the `trepan debugger <https://pypi.python.org/pypi/trepan3k>`_
 
 
 Using
@@ -33,7 +33,7 @@ You can also pass as keyword arguments any parameter accepted by *trepan.api.deb
 
 To have the debugger entered on error, use the ``--trepan`` option::
 
-    $ py.test --trepan ...
+    $ pytest --trepan ...
 
 
 
