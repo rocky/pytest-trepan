@@ -12,16 +12,14 @@ def pytest_addoption(parser):
                      help="start the trepan Python debugger on errors.")
 
 
-if pytest.__version__ <= "3.2":
-    def pytest_namespace():
-        """Allows user code to insert pytest.trepan() to enter the trepan
-        debugger.
-        """
-        return {'pytest_trepan': pytestTrepan().debug}
 
 
 def pytest_configure(config):
     """Called to configure pytest when "pytest --trepan ... " is invoked"""
+    # Modern pytest compatibility - inject trepan into pytest namespace
+    # This replaces the deprecated pytest_namespace hook
+    pytest.trepan = pytestTrepan().debug
+    
     if config.getvalue("usetrepan"):
         # What does the string 'trepaninvoke' do??
         config.pluginmanager.register(TrepanInvoke(), 'trepaninnvoke')
