@@ -31,7 +31,7 @@ def pytest_configure(config):
         pytestTrepan._config = None
     pytestTrepan._pluginmanager = config.pluginmanager
     pytestTrepan._config = config
-    config._cleanup.append(fin)
+    config.add_cleanup(fin)
 
 
 class pytestTrepan:

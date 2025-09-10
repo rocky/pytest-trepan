@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 class Option(object):
     def __init__(self, no_trepan=False):
@@ -11,6 +12,12 @@ class Option(object):
         else:
             l = ['--trepan']
         return l
+
+
+def test_trepan_namespace_available():
+    """Test that pytest.trepan is available after plugin loads"""
+    assert hasattr(pytest, 'trepan'), "pytest.trepan should be available"
+    assert callable(pytest.trepan), "pytest.trepan should be callable"
 
 
 def test_post_mortem(testdir):
