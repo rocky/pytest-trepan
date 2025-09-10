@@ -43,7 +43,7 @@ setup(
         'pytest11': ['trepan = pytest_trepan.plugin'],
     },
     install_requires=[
-        'pytest',
+        'pytest>=4.0.0',  # Minimum version that removed pytest_namespace
         '%s>=0.8.10' % trepan_version
     ],
     zip_safe=False,
@@ -60,12 +60,14 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Topic :: Software Development :: Debuggers',
          "Framework :: Pytest",
     ],

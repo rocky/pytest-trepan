@@ -3,6 +3,7 @@ import pytest
 from trepan.api import debug as trepan_debug
 from trepan.post_mortem import post_mortem as trepan_post_mortem
 import sys
+import signal
 
 def pytest_addoption(parser):
     """Adds option --trepan to py.test"""
@@ -12,16 +13,14 @@ def pytest_addoption(parser):
                      help="start the trepan Python debugger on errors.")
 
 
-if pytest.__version__ <= "3.2":
-    def pytest_namespace():
-        """Allows user code to insert pytest.trepan() to enter the trepan
-        debugger.
-        """
-        return {'pytest_trepan': pytestTrepan().debug}
 
 
 def pytest_configure(config):
     """Called to configure pytest when "pytest --trepan ... " is invoked"""
+    # Modern pytest compatibility - inject trepan into pytest namespace
+    # This replaces the deprecated pytest_namespace hook
+    pytest.trepan = pytestTrepan().debug
+    
     if config.getvalue("usetrepan"):
         # What does the string 'trepaninvoke' do??
         config.pluginmanager.register(TrepanInvoke(), 'trepaninnvoke')
@@ -33,7 +32,7 @@ def pytest_configure(config):
         pytestTrepan._config = None
     pytestTrepan._pluginmanager = config.pluginmanager
     pytestTrepan._config = config
-    config._cleanup.append(fin)
+    config.add_cleanup(fin)
 
 
 class pytestTrepan:
@@ -76,7 +75,12 @@ class pytestTrepan:
                 kwargs['level'] = 0
             if not 'step_ignore' in kwargs:
                 kwargs['step_ignore'] = 2
-        trepan_debug(*args, **kwargs)
+        # Temporarily ignore SIGINT while in debugger to prevent readline re-entry issues
+        old_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        try:
+            trepan_debug(*args, **kwargs)
+        finally:
+            signal.signal(signal.SIGINT, old_handler)
 
 
 class TrepanInvoke:
@@ -120,7 +124,12 @@ def _postmortem_traceback(excinfo):
 
 
 def post_mortem(e):
-    trepan_post_mortem(e)
+    # Temporarily ignore SIGINT while in debugger to prevent readline re-entry issues
+    old_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+    try:
+        trepan_post_mortem(e)
+    finally:
+        signal.signal(signal.SIGINT, old_handler)
 
 def debug(immediate=False, *args, **kwargs):
     pytestTrepan().debug(immediate, *args, **kwargs)
