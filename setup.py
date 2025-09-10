@@ -1,4 +1,6 @@
-import sys, re
+import os
+import sys
+
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
@@ -26,7 +28,6 @@ class PyTest(TestCommand):
         errno = pytest.main([])
         sys.exit(errno)
 
-import os
 def get_srcdir():
     filename = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
     return os.path.realpath(filename)

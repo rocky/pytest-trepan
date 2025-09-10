@@ -1,9 +1,12 @@
 """ interactive debugging with the Trepan Python Debugger. """
-import pytest
+import signal
+import sys
+
 from trepan.api import debug as trepan_debug
 from trepan.post_mortem import post_mortem as trepan_post_mortem
-import sys
-import signal
+
+import pytest
+
 
 def pytest_addoption(parser):
     """Adds option --trepan to py.test"""
@@ -66,7 +69,7 @@ class pytestTrepan:
             tw = _pytest.config.create_terminal_writer(self._config)
             tw.line()
             tw.sep(">", "Trepan set_trace (IO-capturing turned off)")
-            self._pluginmanager.hook.pytest_enter_pdb()
+            # self._pluginmanager.hook.pytest_enter_pdb()
         if immediate:
             kwargs['level'] = 1
             kwargs['step_ignore'] = 0
