@@ -3,6 +3,7 @@ import pytest
 from trepan.api import debug as trepan_debug
 from trepan.post_mortem import post_mortem as trepan_post_mortem
 import sys
+import signal
 
 def pytest_addoption(parser):
     """Adds option --trepan to py.test"""
@@ -74,7 +75,12 @@ class pytestTrepan:
                 kwargs['level'] = 0
             if not 'step_ignore' in kwargs:
                 kwargs['step_ignore'] = 2
-        trepan_debug(*args, **kwargs)
+        # Temporarily ignore SIGINT while in debugger to prevent readline re-entry issues
+        old_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        try:
+            trepan_debug(*args, **kwargs)
+        finally:
+            signal.signal(signal.SIGINT, old_handler)
 
 
 class TrepanInvoke:
@@ -118,7 +124,12 @@ def _postmortem_traceback(excinfo):
 
 
 def post_mortem(e):
-    trepan_post_mortem(e)
+    # Temporarily ignore SIGINT while in debugger to prevent readline re-entry issues
+    old_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+    try:
+        trepan_post_mortem(e)
+    finally:
+        signal.signal(signal.SIGINT, old_handler)
 
 def debug(immediate=False, *args, **kwargs):
     pytestTrepan().debug(immediate, *args, **kwargs)
