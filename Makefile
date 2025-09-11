@@ -4,12 +4,11 @@
 # These comments before the targets start with #:
 # remake --tasks to shows the targets and the comments
 
-GIT2CL ?= git2cl
+GIT2CL ?= admin-tools/git2cl
 PYTHON ?= python3
 RM      ?= rm
 LINT    = flake8
 
-#EXTRA_DIST=ipython/ipy_pydbgr.py pydbgr
 PHONY=check clean dist distclean test test-unit test-functional rmChangeLog nosetests
 
 #: Default target - same as "check"
@@ -68,5 +67,6 @@ rmChangeLog:
 #: Create a ChangeLog from git via git log and git2cl
 ChangeLog: rmChangeLog
 	git log --pretty --numstat --summary | $(GIT2CL) >$@
+	codespell ChangeLog
 
 .PHONY: $(PHONY)
