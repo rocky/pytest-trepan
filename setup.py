@@ -42,14 +42,7 @@ setup(
     },
     install_requires=[
         'pytest<=4.6.3',  # Minimum version that removed pytest_namespace
-        '%s>=1.0.0' % trepan_version
-=======
-        "pytest11": ["trepan = pytest_trepan.plugin"],
-    },
-    install_requires=[
-        "pytest>=4.0.0",  # Minimum version that removed pytest_namespace
         "trepan3k>=1.0.0",
->>>>>>> python-3.3-to-3.5
     ],
     zip_safe=False,
     # metadata for upload to PyPI
