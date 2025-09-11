@@ -1,5 +1,6 @@
 #!/bin/bash
-PACKAGE=pytest_trepan
+GITHUB_DIR=pytest_trepan
+PYMODULE_NAME=pytest_trepan
 
 # FIXME put some of the below in a common routine
 function finish {
