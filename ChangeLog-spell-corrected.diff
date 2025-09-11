@@ -1,0 +1,27 @@
+--- ChangeLog	2025-09-11 08:42:25.417527140 -0400
++++ ChangeLog-spell-corrected	2025-09-11 08:41:49.999488948 -0400
+@@ -19,7 +19,7 @@
+ 
+ 	* admin-tools/checkout_common.sh, admin-tools/setup-master.sh,
+ 	admin-tools/setup-python-3.0.sh, admin-tools/setup-python-3.11.sh,
+-	admin-tools/setup-python-3.3.sh, admin-tools/setup-python-3.6.sh: 
++	admin-tools/setup-python-3.3.sh, admin-tools/setup-python-3.6.sh:
+ 	Administrivia
+ 
+ 2025-09-10  rocky <rocky@gnu.org>
+@@ -32,7 +32,7 @@
+ 
+ 2025-09-10  rocky <rocky@gnu.org>
+ 
+-	* pytest/test_trepan.py, pytest_trepan/plugin.py, setup.py: 
++	* pytest/test_trepan.py, pytest_trepan/plugin.py, setup.py:
+ 	Modernize and lint code
+ 
+ 2025-09-10  rocky <rocky@gnu.org>
+@@ -172,5 +172,4 @@
+ 
+ 2015-08-15  rocky <rocky@gnu.org>
+ 
+-	* pytest plugin for trepan - Inital cut
+-
++	* pytest plugin for trepan - Initial cut

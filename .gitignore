@@ -9,6 +9,7 @@
 /.pytest_cache
 /.tox
 /ChangeLog
+/ChangeLog-spell-corrected
 /build
 /dist
 /how-to-make-a-release.txt
