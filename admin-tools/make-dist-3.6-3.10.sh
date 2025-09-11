@@ -1,19 +1,24 @@
 #!/bin/bash
-PACKAGE=pytest_trepan
+GITHUB_DIR=pytest_trepan
+PYMODULE_NAME=pytest_trepan
 
 # FIXME put some of the below in a common routine
 function finish {
   cd $owd
 }
 
-cd $(dirname ${BASH_SOURCE[0]})
 owd=$(pwd)
+cd $(dirname ${BASH_SOURCE[0]})
 trap finish EXIT
 
-if ! source ./pyenv-versions ; then
+if ! source ./pyenv-3.6-3.10-versions ; then
+    exit $?
+fi
+if ! source ./setup-python-3.6.sh ; then
     exit $?
 fi
 
+./adm
 cd ..
 source $PACKAGE/version.py
 echo $VERSION
@@ -33,3 +38,8 @@ for pyversion in $PYVERSIONS; do
 done
 
 python ./setup.py sdist
+tarball=dist/${PYMODULE_NAME}-${__version__}.tar.gz
+if [[ -f $tarball ]]; then
+    mv -v $tarball dist/${PYMODULE_NAME}_36-${__version__}.tar.gz
+fi
+finish
