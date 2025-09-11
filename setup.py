@@ -4,11 +4,7 @@ import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-PYTHON3 = (sys.version_info >= (3, 0))
-if PYTHON3:
-    trepan_version ='trepan3k'
-else:
-    trepan_version = 'trepan2'
+trepan_version ='trepan3k'
 
 class PyTest(TestCommand):
     """
@@ -45,7 +41,7 @@ setup(
     },
     install_requires=[
         'pytest>=4.0.0',  # Minimum version that removed pytest_namespace
-        '%s>=0.8.10' % trepan_version
+        "%s>=1.0.0" % trepan_version
     ],
     zip_safe=False,
 
@@ -61,6 +57,10 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
