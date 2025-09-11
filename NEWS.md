@@ -1,3 +1,7 @@
+3.1.0 2025-09-11
+
+- Add pytest 8.0+ compatibility support. Thanks to Sheikh Abdur Raheem Ali
+
 3.0.0 2018-07-28
 
 - Revise for current py.test (circa 6.x)
