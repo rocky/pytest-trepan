@@ -10,7 +10,7 @@ cd $(dirname ${BASH_SOURCE[0]})
 owd=$(pwd)
 trap finish EXIT
 
-if ! source ./pyenv-versions ; then
+if ! source ./pyenv-3.6-3.10-versions ; then
     exit $?
 fi
 
@@ -33,3 +33,8 @@ for pyversion in $PYVERSIONS; do
 done
 
 python ./setup.py sdist
+tarball=dist/${PYMODULE_NAME}-${__version__}.tar.gz
+if [[ -f $tarball ]]; then
+    mv -v $tarball dist/${PYMODULE_NAME}_36-${__version__}.tar.gz
+fi
+finish
