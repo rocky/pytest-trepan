@@ -1,4 +1,6 @@
 include LICENSE
-include NEWS
+include NEWS.md
 include README.rst
 include tox.ini
+recursive-include pytest_trepan *.py
+recursive-include pytest *.py
