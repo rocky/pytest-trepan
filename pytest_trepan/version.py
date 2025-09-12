@@ -4,4 +4,4 @@
 # This file should define a variable __version__ which we use as the
 # debugger version number.
 
-__version__="3.1.0"  # NOQA
+__version__="3.1.1.dev0"  # NOQA
